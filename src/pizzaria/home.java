@@ -4,9 +4,10 @@
  */
 package pizzaria;
 
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import java.io.File;
 /**
  *
@@ -101,12 +102,27 @@ public class home extends javax.swing.JFrame {
 
         /* Create and display the form */
         try {
-            File musicFile = new File("path_to_your_audio_file.wav"); 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(musicFile);
+            File file = new File("path/to/your/file.mp3");
             Clip clip = AudioSystem.getClip();
-            clip.open(audioStream);
-            clip.loop(Clip.LOOP_CONTINUOUSLY); 
-            clip.start(); 
+            clip.open(AudioSystem.getAudioInputStream(file));
+
+            clip.addLineListener(new LineListener() {
+                @Override
+                public void update(LineEvent event) {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        event.getLine().close();
+                        clip.setMicrosecondPosition(0);
+                        clip.start();
+                    }
+                }
+            });
+
+            clip.start();
+
+            // Loop indefinitely
+            while (true) {
+                Thread.sleep(1000); // Delay to prevent the loop from consuming too much CPU
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
