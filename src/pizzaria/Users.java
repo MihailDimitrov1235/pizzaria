@@ -5,7 +5,6 @@
 package pizzaria;
 
 import java.sql.*;
-import java.util.Arrays;
 
 /**
  *
@@ -13,22 +12,12 @@ import java.util.Arrays;
  */
 public class Users {
 
-    Connection conn = null;
-
-    Users() {
-        try {
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost/pizzaria", "root", "Npmg2022!");
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-    }
+    Conn conn = new Conn();
 
     public ResultSet getUsers() {
         String query = "SELECT * FROM users";
         try {
-            Statement st = this.conn.createStatement();
+            Statement st = this.conn.getConnection().createStatement();
             ResultSet rs = st.executeQuery(query);
             return rs;
         } catch (SQLException e) {
@@ -40,7 +29,7 @@ public class Users {
     public int logIn(String username, char[] password) {
         String query = "SELECT * FROM users WHERE users.username = ? AND users.password = ?";
 
-        try (PreparedStatement ps = this.conn.prepareStatement(query)) {
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query)) {
             ps.setString(1, username);
             ps.setString(2, new String(password));
 
@@ -60,7 +49,7 @@ public class Users {
     public int register(String username, char[] password, String email) {
         String query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
 
-        try (PreparedStatement ps = this.conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, username);
             ps.setString(2, email);
             ps.setString(3, new String(password));

@@ -4,11 +4,7 @@
  */
 package pizzaria;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-import java.io.File;
+
 /**
  *
  * @author mihailvd
@@ -48,22 +44,22 @@ public class home extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(Order)
-                .addGap(70, 70, 70)
-                .addComponent(History)
-                .addContainerGap(128, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(Order)
+                                .addGap(70, 70, 70)
+                                .addComponent(History)
+                                .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(160, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Order)
-                    .addComponent(History))
-                .addGap(165, 165, 165))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(160, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Order)
+                                        .addComponent(History))
+                                .addGap(165, 165, 165))
         );
 
         pack();
@@ -101,31 +97,9 @@ public class home extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        try {
-            File file = new File("path/to/your/file.mp3");
-            Clip clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(file));
-
-            clip.addLineListener(new LineListener() {
-                @Override
-                public void update(LineEvent event) {
-                    if (event.getType() == LineEvent.Type.STOP) {
-                        event.getLine().close();
-                        clip.setMicrosecondPosition(0);
-                        clip.start();
-                    }
-                }
-            });
-
-            clip.start();
-
-            // Loop indefinitely
-            while (true) {
-                Thread.sleep(1000); // Delay to prevent the loop from consuming too much CPU
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        musicPlayer mp = new musicPlayer();
+    
+        mp.play();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new home().setVisible(true);

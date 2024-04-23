@@ -4,40 +4,40 @@
  */
 package pizzaria;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import javax.sound.sampled.AudioFormat;
+import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
 
 /**
  *
  * @author mihailvd
  */
 public class musicPlayer {
-    public void play(InputStream inputStream) {
-    try {
-        AudioInputStream soundIn = AudioSystem.getAudioInputStream(new BufferedInputStream(inputStream) );
-        AudioFormat format = soundIn.getFormat();
-        DataLine.Info info = new DataLine.Info(Clip.class, format);
 
-        Clip clip = (Clip) AudioSystem.getLine(info);
-        clip.open(soundIn);
-        clip.start();
-        sleep(clip.getMicrosecondLength() / 1000);// Thread.yield();
-    } catch (Exception e) {
-        
-        e.printStackTrace();
+    public void play() {
+    String filePath = "music.wav";
+        try {
+            File musicPath = new File(filePath);
+            if (musicPath.exists()) {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            } else {
+                System.out.println("music not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
-private void sleep(long sleep) {
-    try {
-        Thread.sleep(sleep);
-    } catch (InterruptedException ex) {
-        Thread.currentThread().interrupt();
+    private void sleep(long sleep) {
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
-}
 }
