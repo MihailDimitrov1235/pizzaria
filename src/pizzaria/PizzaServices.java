@@ -29,7 +29,7 @@ public class PizzaServices {
             Statement st2 = this.conn.getConnection().createStatement();
             ResultSet rs2 = st.executeQuery(query);
             while(rs2.next()){
-                ps[i] = new Pizza(rs2.getString("name"), rs2.getInt("id"), rs2.getFloat("price"));
+                ps[i] = new Pizza(rs2.getString("name"), rs2.getFloat("price"), rs2.getInt("id"));
                 i++;
             }
             return ps;
