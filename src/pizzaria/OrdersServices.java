@@ -11,19 +11,45 @@ import java.sql.*;
  * @author mihailvd
  */
 public class OrdersServices {
+
     Conn conn = new Conn();
-    
-    void CreateOrder (Pizza[] pizzas, int userID){
-        String query = "SELECT * FROM pizzas";
-        String countQ = "SELECT COUNT(*) FROM pizzas";
-        try {
-            Statement st = this.conn.getConnection().createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while(rs.next()){
-                
+
+    int CreateOrder(Pizza[] pizzas, int userID) {
+        String query = "INSERT INTO `orders`(`user_id`, `order_date`) VALUES ('?','?')";
+        String query2 = "INSERT INTO `orderdetails`(`order_id`, `pizza_id`, `quantity`) VALUES ('?','?','?')";
+
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, userID);
+            ps.setDate(2, new Date(System.currentTimeMillis()));
+            int affectedRows = ps.executeUpdate();
+
+            System.out.println(affectedRows);
+
+            if (affectedRows > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    int orderID = rs.getInt(1);
+                    for (Pizza pizza : pizzas) {
+                        if (pizza.getQuantity() > 0) {
+
+                            try (PreparedStatement ps2 = this.conn.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
+                                ps.setInt(1, orderID);
+                                ps.setInt(2, pizza.getId());
+                                ps.setInt(3, pizza.getQuantity());
+
+                                int affectedRows2 = ps.executeUpdate();
+                            } catch (SQLException e) {
+                                System.out.println(e);
+                            }
+                        }
+                    }
+                }
             }
-        } catch (SQLException e) {
+            return 0;
+        } catch (Exception e) {
             System.out.println(e);
         }
+        return -1;
+
     }
 }
