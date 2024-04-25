@@ -69,4 +69,43 @@ public class Users {
         }
         return -1;
     }
+    
+    public String getRole(int userID) {
+        String query = "SELECT role FROM users WHERE id LIKE ?";
+
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query)) {
+            ps.setInt(1, userID);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("role");
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public int setRole(int userID, String role) {
+        String query = "UPDATE `users` SET `role` = `?` WHERE `users`.`id` = ?; ";
+
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query)) {
+            ps.setString(1, role);
+            ps.setInt(2, userID);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return -1;
+    }
 }
