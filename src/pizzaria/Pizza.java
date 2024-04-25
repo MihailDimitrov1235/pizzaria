@@ -76,6 +76,11 @@ class Pizza {
         }
     }
     
+    @Override
+    public String toString() {
+        return this.name + " " + this.getPrice() + " " + this.getQuantity() + "\n";
+    }
+    
     public JPanel createPizzaPanel(java.lang.Runnable updateTotal) {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));

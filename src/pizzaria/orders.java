@@ -19,7 +19,10 @@ public class orders extends JFrame {
     private double totalSum;
     private DecimalFormat df = new DecimalFormat("#.00");
 
-    public orders(Pizza[] pizzas, int userID) {
+    public orders( int userID) {
+        
+        PizzaServices pser = new PizzaServices();
+        Pizza[] pizzas = pser.getPizzas();
         
         Runnable updateTotal = () -> {
             totalSum = 0;
@@ -52,7 +55,12 @@ public class orders extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OrdersServices oserv = new OrdersServices();
-                oserv.CreateOrder(pizzas, userID);
+                int created = oserv.CreateOrder(pizzas, userID);
+                if(created == 0){
+                    home obj = new home(userID);
+                    obj.setVisible(true);
+                    dispose();
+                }
             }
         });
         buttonPanel.add(printButton);
@@ -64,12 +72,10 @@ public class orders extends JFrame {
     }
 
     public static void main(String[] args) {
-        PizzaServices pser = new PizzaServices();
-        Pizza[] pizzas = pser.getPizzas();
-
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new orders(pizzas, 1).setVisible(true);
+                new orders(1).setVisible(true);
             }
         });
     }

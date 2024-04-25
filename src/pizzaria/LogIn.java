@@ -134,9 +134,12 @@ public class LogIn extends javax.swing.JFrame {
             return;
         }
         int login = users.logIn(un, pass);
-        System.out.println(login);
         if(login == -1){
             helperText.setText("Invalid username or password");
+        }else{
+            home obj = new home(login);
+            obj.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_logInButtonActionPerformed
 

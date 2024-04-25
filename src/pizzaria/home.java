@@ -11,10 +11,12 @@ package pizzaria;
  */
 public class home extends javax.swing.JFrame {
 
+    private final int UserID;
     /**
      * Creates new form home
      */
-    public home() {
+    public home(int UserID) {
+        this.UserID = UserID;
         initComponents();
     }
 
@@ -67,6 +69,9 @@ public class home extends javax.swing.JFrame {
 
     private void OrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderActionPerformed
         // TODO add your handling code here:
+        orders obj = new orders(this.UserID);
+        obj.setVisible(true);
+        dispose();
     }//GEN-LAST:event_OrderActionPerformed
 
     /**
@@ -102,7 +107,7 @@ public class home extends javax.swing.JFrame {
         mp.play();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new home().setVisible(true);
+                new home(1).setVisible(true);
             }
         });
     }

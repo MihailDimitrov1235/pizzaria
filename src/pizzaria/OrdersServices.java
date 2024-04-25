@@ -15,11 +15,12 @@ public class OrdersServices {
     Conn conn = new Conn();
 
     int CreateOrder(Pizza[] pizzas, int userID) {
-        String query = "INSERT INTO `orders`(`user_id`, `order_date`) VALUES ('?','?')";
-        String query2 = "INSERT INTO `orderdetails`(`order_id`, `pizza_id`, `quantity`) VALUES ('?','?','?')";
+        String query = "INSERT INTO `orders`(`user_id`, `order_date`) VALUES (?,?)";
+        String query2 = "INSERT INTO `orderdetails`(`order_id`, `pizza_id`, `quantity`) VALUES (?,?,?)";
 
         try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, userID);
+            System.out.println("test");
             ps.setDate(2, new Date(System.currentTimeMillis()));
             int affectedRows = ps.executeUpdate();
 
@@ -31,21 +32,24 @@ public class OrdersServices {
                     int orderID = rs.getInt(1);
                     for (Pizza pizza : pizzas) {
                         if (pizza.getQuantity() > 0) {
-
+                            System.out.println(pizza.toString());
                             try (PreparedStatement ps2 = this.conn.getConnection().prepareStatement(query2, Statement.RETURN_GENERATED_KEYS)) {
-                                ps.setInt(1, orderID);
-                                ps.setInt(2, pizza.getId());
-                                ps.setInt(3, pizza.getQuantity());
+                                System.out.println("cock2");
+                                ps2.setInt(1, orderID);
+                                ps2.setInt(2, pizza.getId());
+                                ps2.setInt(3, pizza.getQuantity());
+                                System.out.println("cock");
 
-                                int affectedRows2 = ps.executeUpdate();
+                                int affectedRows2 = ps2.executeUpdate();
                             } catch (SQLException e) {
                                 System.out.println(e);
+                                return -1;
                             }
                         }
                     }
+                    return 0;
                 }
             }
-            return 0;
         } catch (Exception e) {
             System.out.println(e);
         }

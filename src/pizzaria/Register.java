@@ -166,6 +166,10 @@ public class Register extends javax.swing.JFrame {
         System.out.println(reg);
         if(reg == -1){
             helperText.setText("Invalid username, password or email");
+        }else{
+            home obj = new home(reg);
+            obj.setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_RegisterButtonActionPerformed
 
