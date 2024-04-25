@@ -126,7 +126,7 @@ public class AddPizza extends javax.swing.JFrame {
             float p = Float.parseFloat(Price.getText());
             int finished = pserv.createPizza(Name.getText(), p);
             if(finished == 0){
-                home obj = new home(this.userID);
+                Home obj = new Home(this.userID);
                 obj.setVisible(true);
                 dispose();
             }

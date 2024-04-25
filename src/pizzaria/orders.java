@@ -61,7 +61,7 @@ public class orders extends JFrame {
                 OrdersServices oserv = new OrdersServices();
                 int created = oserv.CreateOrder(pizzas, userID);
                 if(created == 0){
-                    home obj = new home(userID);
+                    Home obj = new Home(userID);
                     obj.setVisible(true);
                     dispose();
                 }

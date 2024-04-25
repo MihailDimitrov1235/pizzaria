@@ -137,7 +137,7 @@ public class LogIn extends javax.swing.JFrame {
         if(login == -1){
             helperText.setText("Invalid username or password");
         }else{
-            home obj = new home(login);
+            Home obj = new Home(login);
             obj.setVisible(true);
             dispose();
         }
