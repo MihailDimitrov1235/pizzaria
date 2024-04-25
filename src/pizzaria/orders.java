@@ -21,10 +21,6 @@ public class orders extends JFrame {
 
     public orders( int userID) {
         
-        musicPlayer mp = new musicPlayer();
-    
-        mp.play();
-        
         PizzaServices pser = new PizzaServices();
         Pizza[] pizzas = pser.getPizzas();
         
@@ -75,13 +71,13 @@ public class orders extends JFrame {
         buttonPanel.add(displayArea);
     }
 
-    public static void main(String[] args) {
-        
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new orders(1).setVisible(true);
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        
+//        SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                new orders(1).setVisible(true);
+//            }
+//        });
+//    }
 
 }

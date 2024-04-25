@@ -13,7 +13,7 @@ import java.sql.*;
 public class Conn {
 
     String username = "root";
-    String password = "Npmg2022!"; // "Npmg2022!"
+    String password = ""; // "Npmg2022!"
     Connection c = null;
 
     Conn() {
@@ -28,4 +28,10 @@ public class Conn {
     Connection getConnection(){
         return this.c;
     }
+    
+//    public static void main(String[] args) {
+//        Conn c = new Conn();
+//        System.out.println(c.getConnection());
+//        
+//    }
 }

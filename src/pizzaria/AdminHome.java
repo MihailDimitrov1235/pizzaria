@@ -16,6 +16,7 @@ public class AdminHome extends javax.swing.JFrame {
      * Creates new form AdminHome
      */
     public AdminHome(int userID) {
+        
         this.us = new Users();
         this.userID = userID;
         initComponents();
