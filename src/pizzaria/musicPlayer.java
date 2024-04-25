@@ -16,21 +16,21 @@ import javax.sound.sampled.Clip;
 public class musicPlayer {
 
     public void play() {
-    String filePath = "music.wav";
-        try {
-            File musicPath = new File(filePath);
-            if (musicPath.exists()) {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-                Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
-                clip.start();
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } else {
-                System.out.println("music not found");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//    String filePath = "music.wav";
+//        try {
+//            File musicPath = new File(filePath);
+//            if (musicPath.exists()) {
+//                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+//                Clip clip = AudioSystem.getClip();
+//                clip.open(audioInput);
+//                clip.start();
+//                clip.loop(Clip.LOOP_CONTINUOUSLY);
+//            } else {
+//                System.out.println("music not found");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void sleep(long sleep) {

@@ -21,6 +21,10 @@ public class orders extends JFrame {
 
     public orders( int userID) {
         
+        musicPlayer mp = new musicPlayer();
+    
+        mp.play();
+        
         PizzaServices pser = new PizzaServices();
         Pizza[] pizzas = pser.getPizzas();
         

@@ -16,6 +16,11 @@ public class home extends javax.swing.JFrame {
      * Creates new form home
      */
     public home(int UserID) {
+        
+        musicPlayer mp = new musicPlayer();
+    
+        mp.play();
+        
         this.UserID = UserID;
         initComponents();
     }
@@ -102,9 +107,7 @@ public class home extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        musicPlayer mp = new musicPlayer();
-    
-        mp.play();
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new home(1).setVisible(true);

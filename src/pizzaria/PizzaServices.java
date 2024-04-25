@@ -39,4 +39,26 @@ public class PizzaServices {
         return null;
     }
     
+    public int createPizza(String name, float price) {
+        String query = "INSERT INTO `pizzas`(`name`, `price`) VALUES (?,?)";
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, name);
+            ps.setFloat(2, price);
+
+            int affectedRows = ps.executeUpdate();
+            
+            System.out.println(affectedRows);
+
+            if (affectedRows > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    return 0;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return -1;
+    }
+    
 }
