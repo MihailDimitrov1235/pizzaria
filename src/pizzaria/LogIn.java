@@ -138,7 +138,11 @@ public class LogIn extends javax.swing.JFrame {
             helperText.setText("Invalid username or password");
         }else{
             String role = users.getRole(login);
-            if(role.equals("chef")){
+            if(role == null || role.equals("user")){
+                Home obj = new Home(login);
+                obj.setVisible(true);
+                dispose();
+            }else if(role.equals("chef")){
                 ChefHome obj = new ChefHome(login);
                 obj.setVisible(true);
                 dispose();

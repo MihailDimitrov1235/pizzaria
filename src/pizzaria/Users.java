@@ -103,4 +103,18 @@ public class Users {
         }
         return -1;
     }
+    
+    public int deleteUser(int userID) {
+        String query = "DELETE FROM `users` WHERE `users`.`id` = ?";
+
+        try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query)) {
+            ps.setInt(1, userID);
+
+            int rs = ps.executeUpdate();
+            return rs-1;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return -1;
+    }
 }

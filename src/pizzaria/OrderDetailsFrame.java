@@ -66,21 +66,25 @@ public class OrderDetailsFrame extends javax.swing.JFrame {
             }
         });
 
+        totalField.setEditable(false);
         totalField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Total:");
 
+        deliveredField.setEditable(false);
         deliveredField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Delivered:");
 
+        dateField.setEditable(false);
         dateField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Date:");
 
+        pizzas.setEditable(false);
         pizzas.setColumns(20);
         pizzas.setRows(5);
         jScrollPane1.setViewportView(pizzas);
