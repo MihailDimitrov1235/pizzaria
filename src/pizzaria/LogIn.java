@@ -147,7 +147,7 @@ public class LogIn extends javax.swing.JFrame {
                 obj.setVisible(true);
                 dispose();
             }else if(role.equals("delivery")){
-                AdminHome obj = new AdminHome(login);
+                DeliveryHome obj = new DeliveryHome(login);
                 obj.setVisible(true);
                 dispose();
             }else{

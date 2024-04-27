@@ -19,7 +19,7 @@ public class Users {
         try {
             Statement st = this.conn.getConnection().createStatement();
             ResultSet rs = st.executeQuery(query);
-            return rs;
+            new DatabaseInJTable(rs);
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -90,19 +90,14 @@ public class Users {
     }
     
     public int setRole(int userID, String role) {
-        String query = "UPDATE `users` SET `role` = `?` WHERE `users`.`id` = ?; ";
+        String query = "UPDATE `users` SET `role` = ? WHERE `users`.`id` = ?";
 
         try (PreparedStatement ps = this.conn.getConnection().prepareStatement(query)) {
             ps.setString(1, role);
             ps.setInt(2, userID);
 
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return 0;
-            } else {
-                return -1;
-            }
+            int rs = ps.executeUpdate();
+            return rs-1;
         } catch (SQLException e) {
             System.out.println(e);
         }

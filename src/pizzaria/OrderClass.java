@@ -4,6 +4,8 @@
  */
 package pizzaria;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author might
@@ -13,6 +15,11 @@ public class OrderClass {
     private boolean delivered;
     private String date;
     private Pizza[] pizzas;
+    private DecimalFormat df; 
+
+    public OrderClass() {
+        this.df = new DecimalFormat("#.##");
+    }
 
     public int getId() {
         return id;
@@ -49,6 +56,23 @@ public class OrderClass {
     @Override
     public String toString(){
         return id + " " + delivered + " " + date + "\n" + pizzas[0].toString();
+    }
+    
+    public String pizzasToString(){
+        String result = "";
+        for(Pizza pizza : this.pizzas){
+            result += pizza.getName() + " " + df.format(pizza.getPrice()) + " x " + pizza.getQuantity() + "\n";
+        }
+        System.out.println(result);
+        return result;
+    }
+    
+    public float getTotal(){
+        float result = 0;
+        for(Pizza pizza : this.pizzas){
+            result += pizza.getPrice() * pizza.getQuantity();
+        }
+        return result;
     }
     
 }

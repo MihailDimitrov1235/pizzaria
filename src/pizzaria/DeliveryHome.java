@@ -9,19 +9,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class OrdersFrame extends JFrame {
+/**
+ *
+ * @author might
+ */
+public class DeliveryHome extends JFrame {
     private JButton[] orderButtons;
     private JCheckBox[] deliveryCheckboxes;
     private JLabel[] orderLabels;
     private OrderClass[] orders;
 
-    public OrdersFrame(int userID) {
+    public DeliveryHome(int userID) {
         setTitle("Orders");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         OrdersServices os = new OrdersServices();
-        this.orders = os.GetUserOrders(userID);
+        this.orders = os.GetUndeliveredOrders();
 
         JPanel mainPanel = new JPanel(new GridLayout(orders.length + 1, 2));
 
@@ -33,7 +37,7 @@ public class OrdersFrame extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Home obj = new Home(userID);
+                LogIn obj = new LogIn();
                 obj.setVisible(true);
                 dispose();
             }
@@ -87,7 +91,7 @@ public class OrdersFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Open OrderDetailsFrame with the corresponding order ID
-            OrderDetailsFrame obj = new OrderDetailsFrame(this.order, this.userID, false);
+            OrderDetailsFrame obj = new OrderDetailsFrame(this.order, this.userID, true);
             obj.setVisible(true);
             dispose();
         }
@@ -95,7 +99,6 @@ public class OrdersFrame extends JFrame {
 
     public static void main(String[] args) {
         // Example usage
-        SwingUtilities.invokeLater(() -> new OrdersFrame(1)); // Replace 123 with actual user ID
+        SwingUtilities.invokeLater(() -> new DeliveryHome(1)); 
     }
 }
-
