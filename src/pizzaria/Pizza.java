@@ -33,6 +33,9 @@ class Pizza {
         this.price = price;
         this.quantity = 0;
     }
+    
+    public Pizza() {
+    }
 
     public String getName() {
         return name;

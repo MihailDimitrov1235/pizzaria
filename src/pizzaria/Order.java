@@ -14,12 +14,12 @@ import java.text.DecimalFormat;
  *
  * @author mihailvd
  */
-public class orders extends JFrame {
+public class Order extends JFrame {
     private JTextArea displayArea;
     private double totalSum;
     private DecimalFormat df = new DecimalFormat("#.00");
 
-    public orders( int userID) {
+    public Order( int userID) {
         
         PizzaServices pser = new PizzaServices();
         Pizza[] pizzas = pser.getPizzas();
