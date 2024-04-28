@@ -4,7 +4,9 @@
  */
 package pizzaria;
 
+import java.io.*;
 import java.sql.*;
+import java.util.Arrays;
 
 /**
  *
@@ -28,6 +30,36 @@ public class Conn {
     Connection getConnection(){
         return this.c;
     }
+    
+    private static String readFile(String filePath) throws IOException {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                contentBuilder.append(line).append("\n");
+            }
+        }
+        return contentBuilder.toString();
+    }
+    
+    public void initDatabase(){
+    
+        String sqlFilePath = "database.sql";
+
+        try {
+            String[] sqlCommands = readFile(sqlFilePath).split(";"); 
+
+            Statement statement = this.c.createStatement();
+            for (String sqlCommand : sqlCommands) {
+                statement.addBatch(sqlCommand);
+            }
+
+            statement.executeBatch();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+        
     
 //    public static void main(String[] args) {
 //        Conn c = new Conn();

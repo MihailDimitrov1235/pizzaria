@@ -211,8 +211,6 @@ public class OrdersServices {
                 }
                 
                 result[i].setPizzas(pizzas);
-                
-                System.out.println(result[i].toString());
                 i++;
             }
             

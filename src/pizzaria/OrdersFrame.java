@@ -26,8 +26,7 @@ public class OrdersFrame extends JFrame {
         JPanel mainPanel = new JPanel(new GridLayout(orders.length + 1, 2));
 
         // Back button
-        JPanel backButtonPanel = new JPanel();
-        backButtonPanel.setSize(100, 30);
+        JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton backButton = new JButton("Back");
         backButtonPanel.add(backButton);
         backButton.addActionListener(new ActionListener() {
