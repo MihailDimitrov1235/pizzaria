@@ -22,7 +22,8 @@ CREATE TABLE `pizzas` (
 INSERT INTO `pizzas` (`id`, `name`, `price`) VALUES
 (1, 'Margherita', '9.99'),
 (2, 'Pepperoni', '10.99'),
-(3, 'Vegetarian', '11.99');
+(3, 'Vegetarian', '11.99'),
+(4, "GARRY'S MEAT", '23');
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,

@@ -12,13 +12,13 @@ public class Pizzaria {
 
     public static void main(String[] args) {
 
-        try {
-            musicPlayer mp = new musicPlayer();
-            mp.play();
-        } catch (Exception e) {
-            System.out.println("Problem with music player");
-            System.out.println(e);
-        }
+//        try {
+//            musicPlayer mp = new musicPlayer();
+//            mp.play();
+//        } catch (Exception e) {
+//            System.out.println("Problem with music player");
+//            System.out.println(e);
+//        }
         
         Conn c = new Conn();
         c.initDatabase();
